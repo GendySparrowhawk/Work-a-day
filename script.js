@@ -1,9 +1,34 @@
+
+
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 $(function () {
+  var timeBlocks = $('.time-block');
+  var currentHr = dayjs().hour();
+  timeBlocks.each(function (timeBlock) {
+    timeBlock = $(this)
+    var hour = timeBlock.attr('id').split('-')[1];
+    console.log(timeBlock, currentHr, hour);
+    if(hour == currentHr) {
+      timeBlock.addClass('present');
+    }
+    else if (hour > currentHr) {
+      timeBlock.addClass('future');
+    }
+    else if (hour < currentHr) {
+      timeBlock.addClass('past');
+    }
+    })
+  
+  });
   // TODO: Add a listener for click events on the save button. This code should
+  var save = $('.time-block button');
   // use the id in the containing time-block as a key to save the user input in
+  function saveTodo() {
+    console.log ('save');
+  }
+  save.click(saveTodo);
   // local storage. HINT: What does `this` reference in the click listener
   // function? How can DOM traversal be used to get the "hour-x" id of the
   // time-block containing the button that was clicked? How might the id be
@@ -20,4 +45,4 @@ $(function () {
   // attribute of each time-block be used to do this?
   //
   // TODO: Add code to display the current date in the header of the page.
-});
+
